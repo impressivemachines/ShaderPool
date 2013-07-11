@@ -1,0 +1,47 @@
+Shader Pool
+
+by Simon Winder (Impressive Machines LLC)
+July 2013
+
+
+This code is an objective C class for iOS that implements an Open GL ES shader pool. It handles loading and compiling of multiple vertex and fragment shaders. Shaders resources can be created and referenced by dictionary key strings which are easier to understand and remember in your code than using Open GL resource integers.
+
+Code Example:
+
+    IMShaderPool *m_shaderpool;
+
+    [EAGLContext setCurrentContext:yourContext];
+
+    NSString *shaderpath = [NSString stringWithFormat:@"%@/",[[NSBundle mainBundle] bundlePath]];
+        
+    m_shaderpool = [[IMShaderPool alloc] initWithPath:shaderpath];
+
+    if(![m_shaderpool loadProgram:@"MyShaderName" vertexShader:@"SomeShader.vsh" fragmentShader:@"SomeShader.fsh"])
+    {
+        DEBUG_LOG(@"Error: Failed to load shader");
+        exit(0);
+    }
+
+    …
+
+    GLuint myShader = [m_shaderpool getProgram:@"MyShaderName"];
+
+#ifdef DEBUG
+    // once your frame buffer is set up correctly you can validate your program
+    if(![m_shaderpool validateProgram:myShader])
+    {
+        DEBUG_LOG(@"Error: Shader validation failed");
+        exit(0);
+    }
+#endif
+
+    glUseProgram(myShader);
+
+    …
+
+
+    [m_shaderpool release];
+
+
+
+
