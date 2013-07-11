@@ -1,6 +1,8 @@
 //
 //  IMShaderPool.m
 //  
+// (c) 2013 Simon Winder - Impressive Machines LLC
+//
 
 
 #include <OpenGLES/ES2/gl.h>

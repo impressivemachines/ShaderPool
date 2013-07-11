@@ -1,7 +1,8 @@
 //
 //  IMShaderPool.h
 //  
-
+// (c) 2013 Simon Winder - Impressive Machines LLC
+//
 
 #import <Foundation/Foundation.h>
 
